@@ -6,8 +6,8 @@
 
 ```
 cd /opt
-git clone https://github.com/Knowledge-Wisdom-Understanding/recon.git
-cd recon
+git clone https://github.com/gotr00t0day/RECON.git
+cd RECON
 chmod +x setup.sh
 ./setup.sh
 python3 -m pip install -r requirements.txt
