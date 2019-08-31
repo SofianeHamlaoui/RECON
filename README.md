@@ -10,7 +10,7 @@
 
 ```bash
 cd /opt
-git clone https://github.com/Knowledge-Wisdom-Understanding/recon.git
+git clone https://github.com/gotr00t0day/RECON.git
 cd recon
 chmod +x setup.sh
 ./setup.sh
