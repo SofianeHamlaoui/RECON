@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import os
-from sty import fg, bg, ef, rs, RgbFg
+from sty import fg, bg, ef, rs
 from lib import nmapParser
 from lib import dnsenum
 import glob
@@ -108,7 +108,7 @@ class EnumWebSSL:
         proxy_ssl_ports = npp.proxy_ssl_ports
         proxy_ports2 = npp.proxy_ports
         ssl_proxy_cmds = []
-        cwd = os.getcwd()
+        # cwd = os.getcwd()
         if len(proxy_ssl_ports) == 0:
             pass
         else:
@@ -118,9 +118,9 @@ class EnumWebSSL:
                 os.makedirs(f"{self.target}-Report/proxy/webSSL")
             for proxy in proxy_ports2:
                 for proxy_ssl_port in proxy_ssl_ports:
-                    a = f"{fg.li_cyan} Enumerating HTTPS Ports Through {proxy}, Running the following commands: {fg.rs}"
-                    print(a)
-                    proxy_https_string_ports = ",".join(map(str, proxy_ssl_ports))
+                    print(
+                        f"{fg.li_cyan} Enumerating HTTPS Ports Through {proxy}, Running the following commands: {fg.rs}"
+                    )
                     proxy_whatwebCMD = f"whatweb -v -a 3 --proxy {self.target}:{proxy} https://127.0.0.1:{proxy_ssl_port} | tee {self.target}-Report/proxy/webSSL/whatweb-proxy-{self.target}-{proxy_ssl_port}.txt"
                     ssl_proxy_cmds.append(proxy_whatwebCMD)
                     proxy_dirsearch_cmd = f"python3 /opt/dirsearch/dirsearch.py -e php,asp,aspx,txt,html -x 403,500 -t 50 -w wordlists/dicc.txt --proxy {self.target}:{proxy} -u https://127.0.0.1:{proxy_http_port} --plain-text-report {self.target}-Report/proxy/webSSL/dirsearch-127.0.0.1-{proxy}-{proxy_http_port}.log"
@@ -230,7 +230,8 @@ fi
                                                     f"chmod +x {reportDir}/webSSL/wordpressBrute.sh",
                                                     shell=True,
                                                 )
-                                            except:
+                                            except FileNotFoundError as fnf_error:
+                                                print(fnf_error)
                                                 continue
                                             if "Drupal" in cms:
                                                 drupal_cmd = f"droopescan scan drupal -u https://{self.target}:{ssl_port}/ -t 32 | tee {reportDir}/webSSL/drupalscan-{self.target}-{ssl_port}.log"

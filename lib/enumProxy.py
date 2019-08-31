@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
 import os
-from sys import exit
 from subprocess import call
 import re
-from sty import fg, bg, ef, rs, RgbFg
+from sty import fg, bg, ef, rs
 from lib import nmapParser
 from lib import enumWeb
 from lib import enumWebSSL
@@ -19,13 +18,14 @@ class CheckProxy:
         np = nmapParser.NmapParserFunk(self.target)
         np.openPorts()
         proxyPorts = np.proxy_ports
-        cwd = os.getcwd()
         cmd_info = "[" + fg.li_green + "+" + fg.rs + "]"
         if len(proxyPorts) == 0:
             pass
         else:
             duplicate_cmds = []
-            add_line_cmd = f"""sed -e "\$ahttp {self.target} {proxyPorts[0]}" -i /etc/proxychains.conf"""
+            add_line_cmd = (
+                f"""sed -e "\$ahttp {self.target} {proxyPorts[0]}" -i /etc/proxychains.conf"""
+            )
             proxy_config_file = "/etc/proxychains.conf"
             try:
                 pcCF = open(proxy_config_file, "r")

@@ -1,21 +1,25 @@
 # AUTO-RECON
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fa8f5aab4e434f848e5b7f27bb9eb816)](https://app.codacy.com/app/Knowledge-Wisdom-Understanding/recon?utm_source=github.com&utm_medium=referral&utm_content=Knowledge-Wisdom-Understanding/recon&utm_campaign=Badge_Grade_Dashboard)
+
 ## Quickly Enumerate a Target in Kali Linux
+
+![Recon Loco GIF](img/auto.gif)
 
 ### INSTALLATION
 
-```
+```bash
 cd /opt
-git clone https://github.com/gotr00t0day/RECON.git
+git clone https://github.com/Knowledge-Wisdom-Understanding/recon.git
 cd recon
 chmod +x setup.sh
 ./setup.sh
 python3 -m pip install -r requirements.txt
 ```
 
-### Usage:
+### Usage
 
-```
+```shell
 python3 recon.py -h, --help             show help message and exit
 python3 recon.py -t 10.10.10.10        scan target & enumerate based off nmap results
 python3 recon.py -w 10.10.10.10         Enumerate Web with larger wordlists

@@ -3,10 +3,9 @@
 import os
 
 import re
-from sty import fg, bg, ef, rs, RgbFg
+from sty import fg, bg, ef, rs
 from lib import nmapParser
 from lib import domainFinder
-from subprocess import call
 
 
 class DnsEnum:
@@ -67,9 +66,7 @@ class DnsEnum:
         ]
         dns = []
         try:
-            with open(
-                f"{self.target}-Report/nmap/top-ports-{self.target}.nmap", "r"
-            ) as nm:
+            with open(f"{self.target}-Report/nmap/top-ports-{self.target}.nmap", "r") as nm:
                 for line in nm:
                     new = (
                         line.replace("=", " ")
@@ -79,8 +76,7 @@ class DnsEnum:
                     )
                     # print(new)
                     matches = re.findall(
-                        r"(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}",
-                        new,
+                        r"(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}", new
                     )
                     # print(matches)
                     for x in matches:
@@ -109,7 +105,6 @@ class DnsEnum:
             for x in allsortedhostnames:
                 allsortedhostnameslist.append(x)
         else:
-            https_string_ports = ",".join(map(str, ssl_ports))
             for sslport in ssl_ports:
                 if not os.path.exists(
                     f"{self.target}-Report/webSSL/sslscan-color-{self.target}-{sslport}.log"
@@ -131,9 +126,7 @@ class DnsEnum:
                                 alnam = line.lstrip("Altnames:").rstrip("\n")
                                 alname = alnam.lstrip()
                                 alname1 = alname.lstrip("DNS:")
-                                alname2 = (
-                                    alname1.replace("DNS:", "").replace(",", "").split()
-                                )
+                                alname2 = alname1.replace("DNS:", "").replace(",", "").split()
                                 for x in alname2:
                                     altDomainNames.append(x)
                     both = []
