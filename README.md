@@ -11,7 +11,7 @@
 ```bash
 cd /opt
 git clone https://github.com/gotr00t0day/RECON.git
-cd recon
+cd RECON
 chmod +x setup.sh
 ./setup.sh
 python3 -m pip install -r requirements.txt
