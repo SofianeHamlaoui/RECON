@@ -2,9 +2,11 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fa8f5aab4e434f848e5b7f27bb9eb816)](https://app.codacy.com/app/Knowledge-Wisdom-Understanding/recon?utm_source=github.com&utm_medium=referral&utm_content=Knowledge-Wisdom-Understanding/recon&utm_campaign=Badge_Grade_Dashboard)
 
-## Quickly Enumerate a Target in Kali Linux
+## Features !
 
-![Recon Loco GIF](img/auto.gif)
+- This project use's various tools and chains them together as needed to enumerate a target based off nmap results.
+- Using python multiprocessing, services can be scanned very quickly.
+- This tool is intended for CTF's and can be fairly noisy. (Not the most stealth conscious tool...)
 
 ### INSTALLATION
 
@@ -19,16 +21,83 @@ python3 -m pip install -r requirements.txt
 
 ### Usage
 
-```shell
-python3 recon.py -h, --help             show help message and exit
-python3 recon.py -t 10.10.10.10        scan target & enumerate based off nmap results
-python3 recon.py -w 10.10.10.10         Enumerate Web with larger wordlists
-python3 recon.py -f ips.txt            Scan + Enumerate all IPv4 addr's in ips.txt file
-python3 recon.py -t 10.10.10.10 -b ssh  Brute force ssh users on default port 22
-                                        If unique valid users found, brute force passwords
-python3 recon.py -t 10.10.10.10 -b ssh -p 2222 Same as above but for ssh on port 2222 etc...
+```text
+       _____________          ____    ________________
+      /___/___      \        /  / |  /___/__          \                   _____
+          /  /   _   \______/__/  |______|__|_____ *   \_________________/__/  |___
+       __/__/   /_\   \ |  |  \   __\/  _ \|  |       __/ __ \_/ ___\/  _ \|       |
+      |   |     ___    \|  |  /|  | (  |_| )  |    |   \  ___/\  \__(  |_| )   |   |
+      |___|____/\__\____|____/_|__|\_\____/|__|____|_  /\___  |\___  \____/|___|  /
+      gtihub.com/Knowledge-Wisdom-Understanding  \___\/  \__\/  \__\_/      \___\/
+
+
+usage: python3 recon.py -t 10.10.10.10
+
+An Information Gathering and Enumeration Framework
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TARGET, --target TARGET
+                        Single IPv4 Target to Scan
+  -v, --version         Show Current Version
+  -f FILE, --file FILE  File of IPv4 Targets to Scan
+  -w WEB, --web WEB     Get open ports for IPv4 address, then only Enumerate
+                        Web & and Dns Services
+  -b {ftp,smb,http,ssh}, --brute {ftp,smb,http,ssh}
+                        Experimental! - Brute Force ssh,smb,ftp, or http. -t,
+                        --target is REQUIRED. Must supply only one protocol at
+                        a time. Since there are already many stand-alone
+                        bruteforce tools out there, for ssh, first valid users
+                        will be enumerated before password brute is initiated,
+                        when no user or passwords are supplied as options.
+  -p PORT, --port PORT  port for brute forcing argument. If no port specified,
+                        default port will be used
+  -u USER, --user USER  Single user name for brute forcing, for SSH, if no
+                        user specified, will default to
+                        wordlists/usernames.txt and bruteforce usernames
+  -U USERS, --USERS USERS
+                        List of usernames to try for brute forcing. Not yet
+                        implimented
+  -P PASSWORDS, --PASSWORDS PASSWORDS
+                        List of passwords to try. Not required for SSH
 ```
-#### Brute Demo
-![SSH Brute GIF](img/sshBrute.gif)
+
+To scan a single target and enumerate based off of nmap results:
+
+```
+python3 recon.py -t 10.10.10.10
+```
+
+To Enumerate Web with larger wordlists
+
+```
+python3 recon.py -w 10.10.10.10
+```
+
+To Scan + Enumerate all IPv4 addr's in ips.txt file
+
+```
+python3 recon.py -f ips.txt
+```
+
+Brute force ssh users on default port 22 If unique valid users found, brute force passwords
+
+```
+python3 recon.py -t 10.10.10.10 -b ssh
+```
+
+Same as above but for ssh on port 2222 etc...
+
+```
+python3 recon.py -t 10.10.10.10 -b ssh -p 2222
+```
+
+## Demo
+
+| Recon                                                                                                                              | Brute                                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| <img align="left" width="575" height="363" src="https://github.com/gotr00t0day/RECON/blob/master/img/auto.gif"> | <img align="left" width="575" height="363" src="https://github.com/gotr00t0day/RECON/blob/master/img/sshBrute.gif"> |
+
 This program is intended to be used in kali linux.
 If you notice a bug or have a feature request. Please create an issue or submit a pull request. Thanks!
+
