@@ -6,4 +6,3 @@
 - This project use's various tools and chains them together as needed to enumerate a target based off nmap results.
 - Using python multiprocessing, services can be scanned very quickly.
 - If Virtual Host Routing is detected, _Auto-Recon_ will add them to your /etc/hosts file and continue to enumerate the newly discovered host names.
-
